@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+
 
 const Input = ({ question, setQuestion, onKeyDown }) => {
   return (
     <div
       style={{
-        width: "91.67%", // Equivalent to w-11/12
+        width: "91.67%", 
       }}
     >
       <input
@@ -15,11 +15,10 @@ const Input = ({ question, setQuestion, onKeyDown }) => {
         onKeyDown={onKeyDown}
         style={{
           width: "100%",
-          height: "2.5rem", // Equivalent to h-10
-          borderRadius: "0.375rem", // Equivalent to rounded-md
-          border: "1px solid #e5e7eb", // Equivalent to border
-          outline: "none",
-          paddingLeft: "1rem", // Equivalent to px-4
+          height: "41px", 
+          borderRadius: "0.375rem", 
+        
+          paddingLeft: "1rem",
         }}
         placeholder="Type your question here..."
       />

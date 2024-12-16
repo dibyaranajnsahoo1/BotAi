@@ -27,13 +27,13 @@ const ChatPage = () => {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   const handleRatingSubmit = (rating) => {
-    dispatch(addRating({ id: Date.now(), rating })); // Save rating in Redux store
+    dispatch(addRating({ id: Date.now(), rating })); 
     setIsRatingOpen(false);
-    setIsFeedbackOpen(true); // Open feedback modal after rating
+    setIsFeedbackOpen(true);
   };
 
   const handleFeedbackSubmit = (feedback) => {
-    dispatch(addFeedback({ id: Date.now(), feedback })); // Save feedback in Redux store
+    dispatch(addFeedback({ id: Date.now(), feedback })); 
 
     dispatch(saveConversations());
     setIsFeedbackOpen(false);
@@ -57,17 +57,18 @@ const ChatPage = () => {
   
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <div style={{ width: "13rem"}}>
+      <div style={{ width: "208px"}}>
         <Sidebar />
       </div>
       <div
         style={{
+          width:'0px',
           position: "relative",
           padding: "1rem",
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
-          background: "linear-gradient(to bottom, #FFFAF1, #E1E1E1)",
+          background: "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
         }}
       >
         <Navigation />
@@ -76,7 +77,6 @@ const ChatPage = () => {
             padding: "1rem",
             overflowY: "auto",
             marginTop: "auto",
-            maxHeight: "calc(100vh - 80px)",
             width: "100%",
             "&::-webkit-scrollbar": {
               display: "none",
@@ -100,6 +100,7 @@ const ChatPage = () => {
             bottom: "0",
             width: "100%",
             padding: "1rem",
+            
           }}
         >
           <Input
@@ -111,7 +112,7 @@ const ChatPage = () => {
 
           <Button text={"Save"} handleClick={handleSave} />
           <div style={{ position: "absolute", bottom: "5rem", right: "1.25rem" }}>
-            {isRatingOpen && <StarRating handleRatingSubmit={handleRatingSubmit} />}
+            {isRatingOpen && <StarRating handleRatingSubmit={handleRatingSubmit} totalStars={5} />}
             {isFeedbackOpen && (
               <FeedbackBox
                 isOpen={isFeedbackOpen}

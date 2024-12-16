@@ -1,5 +1,5 @@
 import React from "react";
-import botAIlogo from "../assets/botAI_logo.png";
+// import botAIlogo from "../assets/botAI_logo.png";
 import botAIlogos from "../assets/Group 1000011095.png";
 
 
@@ -15,12 +15,13 @@ const Sidebar = () => {
 
   const handleEditClick = () => {
     dispatch(clearChat());
-    navigate("/chat");
+    navigate("/");
   };
 
   return (
     <div
       style={{
+        
         position: "fixed",
         top: 0,
         left: 0,

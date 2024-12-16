@@ -35,19 +35,21 @@ const SuggestionCards = ({ text, data }) => {
   return (
     <div
       style={{
-        height: "7rem",
+       
+        height: "111px  ",
         display: "flex",
         flexDirection: "column",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         padding: "1rem",
-        backgroundColor: "#E5E7EB", // Suggestion background color
-        borderRadius: "0.375rem",
+        backgroundColor: "#FFFFFF", 
+        borderRadius: "5px",
         cursor: "pointer",
+        
       }}
       onClick={handleClick}
     >
-      <p style={{ fontSize: "1.25rem", fontWeight: "700" }}>{text}</p>
-      <p style={{ fontSize: "1rem", fontWeight: "400", color: "#9CA3AF" }}>
+      <p style={{ fontSize: "20px", fontWeight: "700" , ontFamily:'Ubuntu'}}>{text}</p>
+      <p style={{ fontSize: "16px", fontWeight: "400", color: "#9CA3AF" , ontFamily:'Ubuntu'}}>
         Get immediate AI generated response
       </p>
     </div>

@@ -82,23 +82,23 @@ const HomePage = ({ data }) => {
               alignItems: "center",
               justifyContent: "center",
               flexGrow: 1,
-              gap: "1.5rem",
+              gap: "5px",
             }}
           >
-            <p style={{ fontSize: "1.25rem", fontWeight: "500" }}>
+            <p style={{ fontSize: "28px", fontWeight: "500",fontFamily:'Ubuntu', }}>
               How Can I Help You Today?
             </p>
             <img
               src={botAILogo}
               alt="bot AI logo"
-              style={{ width: "4rem", height: "4rem" }}
+              style={{ width: "65.3px", height: "69px", filter: "drop-shadow(0px 4px 4px 0px #00000040)" }}
             />
           </div>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(1, 1fr)",
+              gridTemplateColumns: "repeat(2, 1fr)",
               gap: "1rem",
               marginTop: "auto",
               width: "100%",
@@ -111,7 +111,7 @@ const HomePage = ({ data }) => {
             }}
           >
             {data.slice(0, 4).map((item, index) => (
-              <div key={index} style={index === 3 ? { display: "none" } : {}}>
+              <div key={index} style={index === 4 ? { display: "none" } : {}}>
                 <SuggestionCards text={item.question} data={data} />
               </div>
             ))}

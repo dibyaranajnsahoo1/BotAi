@@ -14,6 +14,7 @@ const PastConversations = () => {
       <div style={{ width: "13rem" }}>
         <Sidebar />
       </div>
+      
       <div
         style={{
           position: "relative",
@@ -21,49 +22,52 @@ const PastConversations = () => {
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
-          backgroundColor: "#E5D6F7", // bg-purpleLight color
+          backgroundColor: 'linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)', 
         }}
       >
         <Navigation />
+        
         <div style={{ margin: "1.5rem auto" }}>
           <h1
             style={{
               fontSize: "2rem",
               fontWeight: "bold",
-              color: "#F44336", // text-red-400 color
+              color: "#F44336", 
             }}
           >
             Conversation History
           </h1>
         </div>
+        
 
         <div
           style={{
             marginTop: "1rem",
             overflowY: "auto",
             padding: "1rem",
-            maxHeight: "calc(100vh - 160px)",
+            // maxHeight: "calc(100vh - 160px)",
             "&::-webkit-scrollbar": {
               display: "none",
             },
           }}
         >
+          <h1 style={{fontSize:'20px'}}>Today's Chats</h1>
           {conversationHistory.length > 0 ? (
             conversationHistory.map((conversation, index) => (
               <div
                 key={index}
                 style={{
-                  backgroundColor: "#9C74B7", // bg-purple color
-                  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // shadow-md
+                 background: 'linear-gradient(90deg, #BFACE2 0%, #D7C7F4 100%)', 
+                  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", 
                   padding: "1rem",
                   marginBottom: "1rem",
-                  borderRadius: "0.375rem", // rounded-md
+                  borderRadius: "0.375rem", 
                   width: "100%",
-                  maxWidth: "50%",
+                 height:'265px',
                   margin: "auto",
                 }}
               >
-                {/* Render each question and answer pair */}
+                
                 {conversation.map((entry, entryIndex) => (
                   <ConversationHistoryMessageBox
                     key={entryIndex}
@@ -76,7 +80,7 @@ const PastConversations = () => {
           ) : (
             <p
               style={{
-                color: "#6B7280", // text-gray-500 color
+                color: "#6B7280", 
                 textAlign: "center",
                 marginTop: "1rem",
               }}

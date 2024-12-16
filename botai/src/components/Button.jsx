@@ -5,14 +5,15 @@ const Button = ({ text, handleClick }) => {
     <div
       style={{
         display: "flex",
+        fontFamily:'Ubuntu',
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#9C74B7", // bg-purple
-        fontSize: "1rem", // text-base
-        fontWeight: "normal", // font-normal
-        width: "4rem", // w-16
+        backgroundColor: "#D7C7F4",
+        fontSize: "20px", 
+        fontWeight: "normal", 
+        width: "4rem",
         height: "2.5rem", 
-        borderRadius: "0.375rem", 
+        borderRadius: "5px", 
         cursor: "pointer",
       }}
       onClick={handleClick}

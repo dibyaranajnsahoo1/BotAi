@@ -1,17 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import avatar from "../assets/avatar.png";
 import botAILogo from "../assets/botAI_logo.png";
 import { toggleLikeDislike } from "../features/chatSlice";
 import { useDispatch } from "react-redux";
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa"; 
+import StarRating from "./Rating";
+import FeedbackBox from "./FeedbackBox";
+import {
+  saveConversations,
+  clearChat,
+  addRating,
+  addFeedback,
+} from "../../src/features/chatSlice";
 
 const ChatBox = ({ text, type, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
+  const [isRatingOpen, setIsRatingOpen] = useState(false);
+  const [time, setTime] = useState("");
 
-  const handleLike = () =>
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? "0" : ""}${minutes} ${ampm}`;
+    setTime(formattedTime);
+  };
+
+  useEffect(() => {
+    getCurrentTime();
+    const intervalId = setInterval(getCurrentTime, 60000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const [timerId, setTimerId] = useState(null);
+
+  const handleLike = () => {
     dispatch(toggleLikeDislike({ index, value: "like" }));
-  const handleDislike = () =>
+    setIsRatingOpen(true);
+
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    const newTimerId = setTimeout(() => {
+      setIsRatingOpen(false);
+    }, 2000);
+    setTimerId(newTimerId);
+  };
+
+  const handleDislike = () => {
     dispatch(toggleLikeDislike({ index, value: "dislike" }));
+  };
+
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+
+  const handleRatingSubmit = (rating) => {
+    dispatch(addRating({ id: Date.now(), rating })); 
+    setIsRatingOpen(false);
+    setIsFeedbackOpen(true);
+  };
+
+  const handleFeedbackSubmit = (feedback) => {
+    dispatch(addFeedback({ id: Date.now(), feedback })); 
+    dispatch(saveConversations());
+    setIsFeedbackOpen(false);
+    dispatch(clearChat());
+  };
 
   return (
     <div
@@ -21,8 +77,8 @@ const ChatBox = ({ text, type, index }) => {
         display: "flex",
         padding: "1rem 1.25rem",
         borderRadius: "20px",
-        backgroundColor: "var(--chatcard-bg)", // Assuming you have this in your CSS variables
-        gap: "1rem",
+        backgroundColor: "#D7C7F421",
+        gap: "20px",
         marginBottom: "1rem",
         alignItems: "center",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
@@ -42,55 +98,72 @@ const ChatBox = ({ text, type, index }) => {
           {type === "question" ? "You" : "Bot AI"}
         </p>
         <p style={{ marginBottom: "0.5rem" }}>{text}</p>
-        <p style={{ fontSize: "0.75rem", color: "rgba(255, 255, 255, 0.6)", marginTop: "auto" }}>
-          10:39 AM
+        <p
+          style={{
+            fontSize: "0.75rem",
+            color: "rgb(68, 66, 66)",
+            marginTop: "auto",
+          }}
+        >
+          {time}
         </p>
       </div>
       {type === "answer" && isHovered && (
         <div
           style={{
             position: "absolute",
-            width: "2.25rem",
             display: "flex",
             gap: "0.5rem",
             bottom: "0.25rem",
-            right: "5rem",
-            animation: "bounce 0.3s ease-in-out infinite",
+            left: "170px",
+            marginBottom: "20px",
           }}
         >
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              style={{ width: "1.5rem", height: "1.5rem" }}
-              onClick={handleLike}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z"
-              />
-            </svg>
+          <button
+            onClick={handleLike}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <FaThumbsUp
+              style={{
+                fontSize: "16px",
+              }}
+            />
           </button>
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              style={{ width: "1.5rem", height: "1.5rem" }}
-              onClick={handleDislike}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M7.498 15.25H4.372c-1.026 0-1.945-.694-2.054-1.715a12.137 12.137 0 0 1-.068-1.285c0-2.848.992-5.464 2.649-7.521C5.287 4.247 5.886 4 6.504 4h4.016a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23h1.294M7.498 15.25c.618 0 .991.724.725 1.282A7.471 7.471 0 0 0 7.5 19.75 2.25 2.25 0 0 0 9.75 22a.75.75 0 0 0 .75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 0 0 2.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384m-10.253 1.5H9.7m8.075-9.75c.01.05.027.1.05.148.593 1.2.925 2.55.925 3.977 0 1.487-.36 2.89-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398-.306.774-1.086 1.227-1.918 1.227h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 0 0 .303-.54"
-              />
-            </svg>
+
+          {isRatingOpen && <StarRating handleRatingSubmit={handleRatingSubmit} />}
+          
+          {isFeedbackOpen && (
+            <FeedbackBox
+              isOpen={isFeedbackOpen}
+              onClose={() => setIsFeedbackOpen(false)}
+              onSubmit={handleFeedbackSubmit}
+            />
+          )}
+
+          <button
+            onClick={() => {
+              handleDislike();
+              handleRatingSubmit();
+            }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <FaThumbsDown
+              style={{
+                fontSize: "16px",
+              }}
+            />
           </button>
         </div>
       )}
