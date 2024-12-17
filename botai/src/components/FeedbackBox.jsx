@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-
+import { useSelector } from "react-redux"; 
+import idea from '../../src/assets/image 34.png' 
 const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
   const [feedback, setFeedback] = useState("");
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode); // Get dark mode state
   if (!isOpen) return null;
-  
+
   return (
     <div
       style={{
@@ -17,15 +19,17 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
     >
       <div
         style={{
-          backgroundColor: "white",
+          backgroundColor: isDarkMode ? "#333333" : "#FAF7FF", // Dark or light background
           padding: "1rem",
           borderRadius: "0.375rem",
+          // border:'1px solid red'
+          width:'766px'
         }}
       >
         <div
           style={{
-            backgroundColor: "var(--purpleFeedback)", // Assuming you have this color defined
-            width: "83.33%", // Equivalent to w-5/6
+            backgroundColor: isDarkMode ? "#444444" : "#FAF7FF", // Dark or light purple background
+           
             maxWidth: "766px",
             height: "max-content",
             borderRadius: "0.625rem",
@@ -48,26 +52,12 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
                 gap: "1rem",
               }}
             >
-              <svg
-                style={{
-                  width: "2.5rem",
-                  height: "2.5rem",
-                }}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-                />
-              </svg>
+     
+              <img src={idea} alt="" />
               <p
                 style={{
                   fontSize: "22px",
+                  color: isDarkMode ? "#FFFFFF" : "#000000", // Dark or light text color
                 }}
               >
                 Provide Additional Feedback
@@ -103,13 +93,17 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
               onChange={(e) => setFeedback(e.target.value)}
               style={{
                 resize: "none",
-                width: "91.67%", // Equivalent to w-11/12
+                width: "91.67%", 
                 borderRadius: "0.625rem",
                 padding: "1rem",
                 height: "170px",
                 margin: "0.5rem auto",
-                border: "1px solid #e5e7eb", // Equivalent to border-gray-200
+                border: isDarkMode
+                  ? "1px solid #555555" 
+                  : "1px solid #e5e7eb", 
                 outline: "none",
+                backgroundColor: isDarkMode ? "#444444" : "#ffffff", 
+                color: isDarkMode ? "#FFFFFF" : "#000000",
               }}
             ></textarea>
           </div>
@@ -125,9 +119,10 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
                 width: "157px",
                 height: "50px",
                 textAlign: "center",
-                backgroundColor: "var(--purple)", // Assuming you have this color defined
+                backgroundColor: isDarkMode ? "#555555" : " #D7C7F4",
                 fontSize: "1.25rem",
                 borderRadius: "0.375rem",
+                color: "#FFFFFF",
               }}
               onClick={() => onSubmit(feedback)}
             >

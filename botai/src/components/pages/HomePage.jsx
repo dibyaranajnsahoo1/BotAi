@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import botAILogo from "../../assets/botAI_logo.png";
 import Navigation from "../Navigation";
 import Input from "../Input";
@@ -19,7 +19,7 @@ import "../styles.css";
 const HomePage = ({ data }) => {
   const question = useSelector((state) => state.chat.currentQuestion);
   const answer = useSelector((state) => state.chat.currentAnswer);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const findAnswer = (text) => {
@@ -31,7 +31,6 @@ const HomePage = ({ data }) => {
   };
 
   const handleAsk = () => {
-    console.log("question", question);
     if (!question) {
       alert("Please enter a question");
       return;
@@ -45,11 +44,9 @@ const HomePage = ({ data }) => {
     navigate("/chat");
   };
 
-  const dispatch = useDispatch();
-
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-        <div style={{ width: "208px" }}>
+      <div style={{ width: "208px" }}>
         <Sidebar />
       </div>
       <div
@@ -59,10 +56,9 @@ const HomePage = ({ data }) => {
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
-          background: 'linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)'
-
+          background:
+            "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
         }}
-        
       >
         <Navigation />
         <div
@@ -85,18 +81,22 @@ const HomePage = ({ data }) => {
               gap: "5px",
             }}
           >
-            <p style={{ fontSize: "28px", fontWeight: "500",fontFamily:'Ubuntu', }}>
+            <p style={{ fontSize: "28px", fontWeight: "500", fontFamily: "Ubuntu" }}>
               How Can I Help You Today?
             </p>
             <img
               src={botAILogo}
               alt="bot AI logo"
-              style={{ width: "65.3px", height: "69px", filter: "drop-shadow(0px 4px 4px 0px #00000040)" }}
+              onError={(e) => (e.target.src = "/path/to/default/logo.png")}
+              style={{
+                width: "65.3px",
+                height: "69px",
+                filter: "drop-shadow(0px 4px 4px 0px #00000040)",
+              }}
             />
           </div>
 
-          <div
-            style={{
+          <div className="suggestion-cards-container"   style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
               gap: "1rem",
@@ -108,10 +108,9 @@ const HomePage = ({ data }) => {
               "@media (min-width: 1024px)": {
                 gridTemplateColumns: "repeat(2, 1fr)",
               },
-            }}
-          >
+            }}>
             {data.slice(0, 4).map((item, index) => (
-              <div key={index} style={index === 4 ? { display: "none" } : {}}>
+              <div key={index}>
                 <SuggestionCards text={item.question} data={data} />
               </div>
             ))}
@@ -138,7 +137,7 @@ const HomePage = ({ data }) => {
               onKeyDown={(e) => e.key === "Enter" && handleAsk()}
             />
             <Button text={"Ask"} handleClick={handleAsk} />
-            <Button text={"Save"} />
+            <Button text={"Save"} handleClick={() => dispatch(saveConversations())} />
           </div>
         </div>
       </div>

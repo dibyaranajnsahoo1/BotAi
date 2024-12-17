@@ -1,15 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import chatReducer from "./features/chatSlice";
-import { loadState, saveState } from "./localStorageUtils";
-
-const persistedState = loadState();
+import chatSlice from "./features/chatSlice";
+import themeSlice from "../src/features/themeSlice"; // Import themeSlice
 
 const store = configureStore({
   reducer: {
-    chat: chatReducer,
-    preloadedState: persistedState,
+    chat: chatSlice,
+    theme: themeSlice, // Add theme slice
   },
 });
 
-store.subscribe(() => saveState(store.getState()));
 export default store;

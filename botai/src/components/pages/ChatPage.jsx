@@ -22,19 +22,19 @@ import "../styles.css";
 const ChatPage = () => {
   const dispatch = useDispatch();
   const question = useSelector((state) => state.chat.currentQuestion);
-
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode); // Access dark mode state
+  
   const [isRatingOpen, setIsRatingOpen] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   const handleRatingSubmit = (rating) => {
-    dispatch(addRating({ id: Date.now(), rating })); 
+    dispatch(addRating({ id: Date.now(), rating }));
     setIsRatingOpen(false);
     setIsFeedbackOpen(true);
   };
 
   const handleFeedbackSubmit = (feedback) => {
-    dispatch(addFeedback({ id: Date.now(), feedback })); 
-
+    dispatch(addFeedback({ id: Date.now(), feedback }));
     dispatch(saveConversations());
     setIsFeedbackOpen(false);
     dispatch(clearChat());
@@ -46,7 +46,7 @@ const ChatPage = () => {
     dispatch(
       addConversation({ question, answer: foundAnswer, timeStamp: Date.now() })
     );
-    dispatch(setQuestion(""));
+    dispatch(setQuestion("")); // Clear question state
   };
 
   const handleSave = () => {
@@ -54,21 +54,23 @@ const ChatPage = () => {
   };
 
   const conversations = useSelector((state) => state.chat.conversations);
-  
+
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <div style={{ width: "208px"}}>
+      <div style={{ width: "208px" }}>
         <Sidebar />
       </div>
       <div
         style={{
-          width:'0px',
+          width: '0px',
           position: "relative",
           padding: "1rem",
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
-          background: "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
+          background: isDarkMode
+            ? "linear-gradient(180deg, rgba(70, 70, 70, 0.2) 0%, rgba(70, 70, 70, 0.2) 100%)"
+            : "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
         }}
       >
         <Navigation />
@@ -78,15 +80,12 @@ const ChatPage = () => {
             overflowY: "auto",
             marginTop: "auto",
             width: "100%",
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
           }}
         >
           {conversations.map((conversation, index) => (
             <div key={index}>
               <ChatBox text={conversation.question} type="question" index={index} />
-              <ChatBox text={conversation.answer} type="answer" index={index}/>
+              <ChatBox text={conversation.answer} type="answer" index={index} />
             </div>
           ))}
         </div>
@@ -100,7 +99,6 @@ const ChatPage = () => {
             bottom: "0",
             width: "100%",
             padding: "1rem",
-            
           }}
         >
           <Input
@@ -108,8 +106,7 @@ const ChatPage = () => {
             setQuestion={(q) => dispatch(setQuestion(q))}
             onKeyDown={(e) => e.key === "Enter" && handleAsk()}
           />
-          <Button text={"Ask"} handleClick={handleAsk} keyDown={handleAsk} />
-
+          <Button text={"Ask"} handleClick={handleAsk} />
           <Button text={"Save"} handleClick={handleSave} />
           <div style={{ position: "absolute", bottom: "5rem", right: "1.25rem" }}>
             {isRatingOpen && <StarRating handleRatingSubmit={handleRatingSubmit} totalStars={5} />}

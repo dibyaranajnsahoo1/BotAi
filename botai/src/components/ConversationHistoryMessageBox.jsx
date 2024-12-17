@@ -1,3 +1,5 @@
+// src/components/ConversationHistoryMessageBox.js
+
 import React from "react";
 import avatar from "../assets/avatar.png";
 import botAIlogo from "../assets/botAI_logo.png";
@@ -9,19 +11,17 @@ const ConversationHistoryMessageBox = ({
   feedback,
   rating,
 }) => {
-  console.log(feedback);
-  console.log(rating);
-
   return (
     <div
       style={{
         width: "100%",
-        backgroundColor: "var(--purple)", // Assuming you have this color defined in your CSS variables
+        backgroundColor: "linear-gradient(90deg, #BFACE2 0%, #D7C7F4 100%)", 
         height: "max-content",
         display: "flex",
         flexDirection: "column",
         padding: "0.5rem",
         gap: "1rem",
+        paddingTop: '20px',
       }}
     >
       <div
@@ -35,24 +35,27 @@ const ConversationHistoryMessageBox = ({
           src={avatar}
           alt=""
           style={{
-            width: "1.5rem",
-            height: "1.5rem",
+            width: "70px",
+            height: "76px",
             flexShrink: 0,
           }}
         />
-        <p
-          style={{
-            fontWeight: "bold",
-            whiteSpace: "nowrap",
-            flexShrink: 0,
-          }}
-        >
-          You :
-        </p>
-        <div style={{ flexGrow: 1 }}>
-          <p>{question}</p>
+        <div style={{display:'flex', flexDirection:'column', paddingLeft:'10px'}}>
+          <p
+            style={{
+              fontWeight: "bold",
+              whiteSpace: "nowrap",
+              flexShrink: 0,
+            }}
+          >
+            You
+          </p>
+          <div style={{ flexGrow: 1 }}>
+            <p>{question}</p>
+          </div>
         </div>
       </div>
+      
       <div
         style={{
           width: "100%",
@@ -66,25 +69,32 @@ const ConversationHistoryMessageBox = ({
           src={botAIlogo}
           alt=""
           style={{
-            width: "2rem",
-            height: "2rem",
+            width: "70px",
+            height: "76px",
             flexShrink: 0,
           }}
         />
-        <p
-          style={{
-            fontWeight: "bold",
-            whiteSpace: "nowrap",
-            flexShrink: 0,
-          }}
-        >
-          BotAI :
-        </p>
-        <p style={{ flexGrow: 1 }}>{answer}</p>
+        <div style={{display:'flex', flexDirection:'column', paddingLeft:'10px'}}>
+          <p
+            style={{
+              fontWeight: "bold",
+              whiteSpace: "nowrap",
+              flexShrink: 0,
+            }}
+          >
+            BotAI
+          </p>
+          <p style={{ flexGrow: 1 }}>{answer}</p>
+        </div>
       </div>
+      
       <div>{likeDislike}</div>
-      <div>{feedback}</div>
-      <div>{rating}</div>
+      <div>
+        <strong>Feedback:</strong> {feedback}
+      </div>
+      <div>
+        <strong>Rating:</strong> {rating}
+      </div>
     </div>
   );
 };

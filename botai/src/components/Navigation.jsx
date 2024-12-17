@@ -1,78 +1,76 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { clearChat } from "../features/chatSlice";
-import Sidebar from "./Sidebar";
-import "./styles.css";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../features/themeSlice";
+import sunIcon from "../assets/sun.png"; 
+import moonIcon from "../assets/moon.png"; 
 
 const Navigation = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
+
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme());
+    const theme = isDarkMode ? "light-mode" : "dark-mode";
+    document.body.className = theme; 
+  };
+
+
+  React.useEffect(() => {
+    document.body.className = isDarkMode ? "dark-mode" : "light-mode";
+  }, [isDarkMode]);
 
   return (
     <div
-      style={{display: "flex",gap: "5px", alignItems: "center", width: "auto",height: "32px", left:'236px',
-        top:'36px' 
+      style={{
+        display: "flex",
+        gap: "5px",
+        alignItems: "center",
+        width: "auto",
+        height: "32px",
       }}
     >
-      {/* <div style={{ display: "none" }} className="sm:block">
-        <svg
-          style={{
-            width: "1.5rem", 
-            height: "1.5rem", 
-          }}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          onClick={() => setIsSidebarOpen(true)}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-          />
-        </svg>
-      </div> */}
-
       <p
         style={{
-          fontSize: "28px", 
-          color: "#9785BA", 
+          fontSize: "28px",
+          color: "#9785BA",
           fontWeight: "700",
           cursor: "pointer",
-          fontFamily:'Ubuntu',
-          left:'236px',
-          top:'36px'
-        }}
-        onClick={() => {
-          dispatch(clearChat());
-          navigate("/");
+          fontFamily: "Ubuntu",
         }}
       >
         Bot AI
       </p>
 
-      {/* {isSidebarOpen && (
-        <Sidebar
-          isOpen={isSidebarOpen}
-          onClose={() => setIsSidebarOpen(false)}
+      {/* Sun and Moon icons toggle */}
+      <div
+        onClick={handleThemeToggle}
+        style={{
+          marginLeft: "auto",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={isDarkMode ? sunIcon : moonIcon} // Toggle between sun and moon icon
+          alt={isDarkMode ? "Light Mode" : "Dark Mode"}
+          style={{
+            width: "24px",
+            height: "24px",
+            marginRight: "8px",
+          }}
         />
-      )} */}
-
-        {/* {isSidebarOpen && (
-          <div
-            style={{
-              position: "fixed",
-              inset: "0",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              zIndex: "10",
-            }}
-            onMouseDown={() => setIsSidebarOpen(false)}
-          />
-        )} */}
+        <span
+          style={{
+            fontSize: "16px",
+            color: "#9785BA",
+            fontWeight: "600",
+            fontFamily: "Ubuntu",
+          }}
+        >
+          {isDarkMode ? "Light" : "Dark"}
+        </span>
+      </div>
     </div>
   );
 };

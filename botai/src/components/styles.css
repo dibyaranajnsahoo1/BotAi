@@ -31,3 +31,36 @@
   z-index: 1000;
   background: white;
 }
+
+
+
+:root {
+  --background-light: #ffffff;
+  --background-dark: #121212;
+  --text-light: #000000;
+  --text-dark: #ffffff;
+}
+
+body.light-mode {
+  background-color: var(--background-light);
+  color: var(--text-light);
+}
+
+body.dark-mode {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+
+/* In styles.css or a styled-components setup */
+@media (min-width: 768px) {
+  .suggestion-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .suggestion-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

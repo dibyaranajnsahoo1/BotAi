@@ -1,25 +1,21 @@
+// src/StarRating.js
 import React, { useState } from "react";
 
-const StarRating = ({ handleRatingSubmit, totalStars = 5 }) => {
+const Rating = ({ handleRatingSubmit, totalStars = 5 }) => {
   const [rating, setRating] = useState(0);
 
-  const handleMouseEnter = (index) => {
-    setRating(index);
-  };
-
-  const handleMouseLeave = () => {
-    setRating(0);
-  };
-
+  const handleMouseEnter = (index) => setRating(index); // Highlight stars on hover
+  const handleMouseLeave = () => setRating(0); // Remove highlight on hover leave
   const handleClick = (index) => {
     setRating(index);
-    handleRatingSubmit(index); 
+    handleRatingSubmit(index); // Call the submit function with the selected rating
   };
 
   return (
     <div
       style={{
         display: "flex",
+        cursor: "pointer",
       }}
       onMouseLeave={handleMouseLeave}
     >
@@ -29,17 +25,14 @@ const StarRating = ({ handleRatingSubmit, totalStars = 5 }) => {
           <svg
             key={starIndex}
             xmlns="http://www.w3.org/2000/svg"
-            fill={rating >= starIndex ? "yellow" : "none"}
+            fill={rating >= starIndex ? "yellow" : "gray"} // Change fill based on rating
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            style={{
-              width: "1.5rem", 
-              height: "1.5rem", 
-              cursor: "pointer",
-            }}
-            onMouseEnter={() => handleMouseEnter(starIndex)}
-            onClick={() => handleClick(starIndex)}
+            width="30"
+            height="30"
+            onMouseEnter={() => handleMouseEnter(starIndex)} // Highlight on hover
+            onClick={() => handleClick(starIndex)} // Set rating on click
           >
             <path
               strokeLinecap="round"
@@ -53,4 +46,4 @@ const StarRating = ({ handleRatingSubmit, totalStars = 5 }) => {
   );
 };
 
-export default StarRating;
+export default Rating;
