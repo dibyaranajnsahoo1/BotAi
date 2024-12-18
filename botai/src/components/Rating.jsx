@@ -4,11 +4,11 @@ import React, { useState } from "react";
 const Rating = ({ handleRatingSubmit, totalStars = 5 }) => {
   const [rating, setRating] = useState(0);
 
-  const handleMouseEnter = (index) => setRating(index); // Highlight stars on hover
-  const handleMouseLeave = () => setRating(0); // Remove highlight on hover leave
+  const handleMouseEnter = (index) => setRating(index); 
+  const handleMouseLeave = () => setRating(0); 
   const handleClick = (index) => {
     setRating(index);
-    handleRatingSubmit(index); // Call the submit function with the selected rating
+    handleRatingSubmit(index); 
   };
 
   return (
@@ -25,14 +25,14 @@ const Rating = ({ handleRatingSubmit, totalStars = 5 }) => {
           <svg
             key={starIndex}
             xmlns="http://www.w3.org/2000/svg"
-            fill={rating >= starIndex ? "yellow" : "gray"} // Change fill based on rating
+            fill={rating >= starIndex ? "yellow" : "gray"} 
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
             width="30"
             height="30"
-            onMouseEnter={() => handleMouseEnter(starIndex)} // Highlight on hover
-            onClick={() => handleClick(starIndex)} // Set rating on click
+            onMouseEnter={() => handleMouseEnter(starIndex)} 
+            onClick={() => handleClick(starIndex)} 
           >
             <path
               strokeLinecap="round"

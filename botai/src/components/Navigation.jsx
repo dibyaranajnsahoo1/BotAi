@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../features/themeSlice";
 import sunIcon from "../assets/sun.png"; 
 import moonIcon from "../assets/moon.png"; 
+import Menu from '../assets/burger-bar.png'
 
-const Navigation = () => {
+const Navigation = ({toggleSidebar }) => {
   const dispatch = useDispatch();
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
 
@@ -19,7 +20,26 @@ const Navigation = () => {
     document.body.className = isDarkMode ? "dark-mode" : "light-mode";
   }, [isDarkMode]);
 
+
+
+
+ const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  
+ 
+
+
   return (
+    
     <div
       style={{
         display: "flex",
@@ -29,6 +49,9 @@ const Navigation = () => {
         height: "32px",
       }}
     >
+       <div onClick={toggleSidebar } style={{width:'30px', height:'40px', display: !isMobileView ? "none" : "block", }}>
+              <img src={Menu} alt=""  style={{width:'100%'}} />
+        </div>
       <p
         style={{
           fontSize: "28px",
@@ -41,7 +64,6 @@ const Navigation = () => {
         Bot AI
       </p>
 
-      {/* Sun and Moon icons toggle */}
       <div
         onClick={handleThemeToggle}
         style={{
@@ -52,7 +74,7 @@ const Navigation = () => {
         }}
       >
         <img
-          src={isDarkMode ? sunIcon : moonIcon} // Toggle between sun and moon icon
+          src={isDarkMode ? sunIcon : moonIcon} 
           alt={isDarkMode ? "Light Mode" : "Dark Mode"}
           style={{
             width: "24px",

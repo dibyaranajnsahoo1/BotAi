@@ -261,9 +261,9 @@ const ChatBox = ({ text, type, index }) => {
 
   const handleFeedbackSubmit = (feedback) => {
     dispatch(addFeedback({ id: Date.now(), feedback }));
-    dispatch(saveConversations()); // Save the conversation history after feedback is submitted
+    dispatch(saveConversations()); 
     setIsFeedbackOpen(false);
-    dispatch(clearChat()); // Clear the current chat
+    dispatch(clearChat());
   };
 
   return (
@@ -279,8 +279,9 @@ const ChatBox = ({ text, type, index }) => {
         marginBottom: "1rem",
         alignItems: "center",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        position: "relative",
+        // position: "relative",
         transition: "all 0.3s",
+        // border:'1px solid red'
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -305,11 +306,9 @@ const ChatBox = ({ text, type, index }) => {
         >
           {time}
         </p>
-      </div>
-      {type === "answer" && isHovered && (
+        {type === "answer" &&  (
         <div
           style={{
-            position: "absolute",
             display: "flex",
             gap: "0.5rem",
             bottom: "0.25rem",
@@ -328,10 +327,12 @@ const ChatBox = ({ text, type, index }) => {
             }}
           >
             <FaThumbsUp
-              style={{
-                color: isDarkMode ? "white" : "Black",
-                fontSize: "16px",
-              }}
+           style={{
+            color: isRatingOpen ? "#1e90ff" : (isDarkMode ? "white" : "black"),
+            fontSize: "16px",
+          }}
+          
+            
             />
           </button>
 
@@ -367,6 +368,8 @@ const ChatBox = ({ text, type, index }) => {
           </button>
         </div>
       )}
+      </div>
+     
     </div>
   );
 };

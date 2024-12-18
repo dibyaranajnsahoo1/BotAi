@@ -1,7 +1,5 @@
-// src/redux/slices/chatSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
-// Helper functions for localStorage
 const loadStateFromLocalStorage = () => {
   try {
     const serializedState = localStorage.getItem("chatState");
@@ -12,8 +10,8 @@ const loadStateFromLocalStorage = () => {
           currentAnswer: "",
           conversations: [],
           savedConversations: [],
-          feedback: {},
-          conversationRatings: {},
+          feedback: [],
+          conversationRatings: [],
         };
   } catch (error) {
     console.error("Failed to load state from localStorage:", error);
@@ -22,8 +20,8 @@ const loadStateFromLocalStorage = () => {
       currentAnswer: "",
       conversations: [],
       savedConversations: [],
-      feedback: {},
-      conversationRatings: {},
+      feedback: [],
+      conversationRatings: [],
     };
   }
 };
@@ -37,7 +35,7 @@ const saveStateToLocalStorage = (state) => {
   }
 };
 
-const initialState = loadStateFromLocalStorage(); // Load initial state from localStorage
+const initialState = loadStateFromLocalStorage(); 
 
 const chatSlice = createSlice({
   name: "chat",
@@ -60,42 +58,42 @@ const chatSlice = createSlice({
       if (state.conversations.length > 0) {
         state.savedConversations.push({
           conversations: [...state.conversations],
-          feedback: { ...state.feedback },
-          ratings: { ...state.conversationRatings },
+          feedback: [...state.feedback],
+          ratings: [...state.conversationRatings],
         });
-        saveStateToLocalStorage(state); // Save updated state to localStorage
+        saveStateToLocalStorage(state); 
         state.conversations = [];
-        state.feedback = {};
-        state.conversationRatings = {};
+        state.feedback = [];
+        state.conversationRatings = [];
       }
     },
     addFeedback: (state, action) => {
-      const { id, feedback } = action.payload;
-      state.feedback[id] = feedback; // Save feedback for the conversation ID
+      const feedback = action.payload;
+      state.feedback.push(feedback); 
     },
     addRating: (state, action) => {
-      const { id, rating } = action.payload;
-      state.conversationRatings[id] = rating; // Save rating for the conversation ID
+      const rating = action.payload;
+      state.conversationRatings.push(rating); 
     },
     removeFeedback: (state, action) => {
-      delete state.feedback[action.payload.id]; // Remove feedback by id
+      state.feedback.pop(); 
     },
     removeRating: (state, action) => {
-      delete state.conversationRatings[action.payload.id]; // Remove rating by id
+      state.conversationRatings.pop(); 
     },
     clearChat: (state) => {
       state.currentQuestion = "";
       state.currentAnswer = "";
       state.conversations = [];
-      state.feedback = {};
-      state.conversationRatings = {};
+      state.feedback = [];
+      state.conversationRatings = [];
     },
-    // Clear history - reset saved conversations, feedback, and ratings
+
     clearHistory: (state) => {
       state.savedConversations = [];
-      state.feedback = {};
-      state.conversationRatings = {};
-      saveStateToLocalStorage(state); // Save cleared state to localStorage
+      state.feedback = [];
+      state.conversationRatings = [];
+      saveStateToLocalStorage(state); 
     },
   },
 });
@@ -111,7 +109,7 @@ export const {
   toggleLikeDislike,
   removeFeedback,
   removeRating,
-  clearHistory, // Export clearHistory action
+  clearHistory,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

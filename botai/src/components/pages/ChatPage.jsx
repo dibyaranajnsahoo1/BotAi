@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import Navigation from "../Navigation";
 import Input from "../Input";
 import Button from "../Button";
@@ -28,25 +29,31 @@ const ChatPage = () => {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   const handleRatingSubmit = (rating) => {
-    dispatch(addRating({ id: Date.now(), rating }));
+    dispatch(addRating( rating ));
     setIsRatingOpen(false);
     setIsFeedbackOpen(true);
   };
 
   const handleFeedbackSubmit = (feedback) => {
-    dispatch(addFeedback({ id: Date.now(), feedback }));
+    dispatch(addFeedback( feedback ));
+    console.log(Date.now(), feedback);
     dispatch(saveConversations());
     setIsFeedbackOpen(false);
     dispatch(clearChat());
   };
 
   const handleAsk = () => {
-    const foundAnswer = "I don't know";
+    if (question.trim() === "") {
+      alert("Please enter a question for Bot AI.");
+      return;
+    }
+
+    const foundAnswer = "I don't know"; 
     dispatch(setAnswer(foundAnswer));
     dispatch(
       addConversation({ question, answer: foundAnswer, timeStamp: Date.now() })
     );
-    dispatch(setQuestion("")); // Clear question state
+    dispatch(setQuestion("")); 
   };
 
   const handleSave = () => {
@@ -55,15 +62,39 @@ const ChatPage = () => {
 
   const conversations = useSelector((state) => state.chat.conversations);
 
+
+
+
+
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    
+    useEffect(() => {
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+      
+  
+    }, []);
+  
+    const sidebarWidth = windowWidth <= 768 ? "0px" : "208px";
+  
+    const [isSidebarVisible, setSidebarVisible] = useState(false);
+  
+    const toggleSidebar = (visibility) => {
+      setSidebarVisible(visibility);
+    };
+  
+
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <div style={{ width: "208px" }}>
-        <Sidebar />
+      <div style={{ width: sidebarWidth }}>
+         <Sidebar  isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar}/>
       </div>
       <div
         style={{
           width: '0px',
-          position: "relative",
+          // position: "relative",
           padding: "1rem",
           display: "flex",
           flexDirection: "column",
@@ -73,7 +104,7 @@ const ChatPage = () => {
             : "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
         }}
       >
-        <Navigation />
+        <Navigation toggleSidebar={() => toggleSidebar(true)}/>
         <div
           style={{
             padding: "1rem",

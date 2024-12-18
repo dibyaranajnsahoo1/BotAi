@@ -50,7 +50,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <div>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Routes>
           <Route index path="/" element={<HomePage data={data} />} />
           <Route path="/chat" element={<ChatPage />} />

@@ -34,12 +34,7 @@
 
 
 
-:root {
-  --background-light: #ffffff;
-  --background-dark: #121212;
-  --text-light: #000000;
-  --text-dark: #ffffff;
-}
+
 
 body.light-mode {
   background-color: var(--background-light);
@@ -51,12 +46,14 @@ body.dark-mode {
   color: var(--text-dark);
 }
 
-
-/* In styles.css or a styled-components setup */
 @media (min-width: 768px) {
   .suggestion-cards-container {
     grid-template-columns: repeat(2, 1fr);
   }
+  #id{
+    width: 0px;
+  }
+  
 }
 
 @media (min-width: 1024px) {
@@ -64,3 +61,15 @@ body.dark-mode {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+
+
+
+
+}
+

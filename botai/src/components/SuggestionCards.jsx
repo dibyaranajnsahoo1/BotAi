@@ -113,7 +113,7 @@ const SuggestionCards = ({ text, data }) => {
       })
     );
     navigate("/chat");
-    dispatch(setQuestion("")); // Clear question state
+    dispatch(setQuestion("")); 
   };
 
   return (
@@ -130,7 +130,7 @@ const SuggestionCards = ({ text, data }) => {
         color: isDarkMode ? "#FFFFFF" : "#000000",
         borderRadius: "5px",
         cursor: "pointer",
-        transition: "background-color 0.3s ease, color 0.3s ease", // Smooth transition
+        transition: "background-color 0.3s ease, color 0.3s ease", 
       }}
       onClick={handleClick}
     >
@@ -149,6 +149,7 @@ const SuggestionCards = ({ text, data }) => {
           fontWeight: "400",
           color: isDarkMode ? "#9CA3AF" : "#6B7280",
           fontFamily: "Ubuntu",
+          marginTop:'-10px'
         }}
       >
         Get immediate AI-generated response

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; // Add useSelector here
 import botAIlogos from "../assets/Group 1000011095.png";
 import editIcon from "../assets/editIcon.png";
+import Close from "../assets/close.png";
+
 import { clearChat } from "../features/chatSlice";
 import "./styles.css";
 
-const Sidebar = () => {
+const Sidebar = ({isSidebarVisible,toggleSidebar}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isDarkMode = useSelector((state) => state.theme.isDarkMode); // Get dark mode state
@@ -16,18 +18,45 @@ const Sidebar = () => {
     navigate("/");
   };
 
+
+
+
+
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+  const [close, setClose] = useState(false);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
+
   return (
     <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        height: "100%",
-        backgroundColor: isDarkMode ? "#333333" : "white", // Dark mode background
-        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        transition: "transform 0.3s ease",
-      }}
-    >
+    style={{
+      position:'fixed', 
+
+      display:  isMobileView && !isSidebarVisible? "none" : "block", 
+      top: 0,
+      left: 0,
+      height: "100%",
+      backgroundColor: isDarkMode ? "#333333" : "white", 
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      transition: "transform 0.3s ease",
+    }}
+  >
+     <img 
+          src={Close}
+          alt="Close"
+          style={{ width: "18px", height: "18px" , display:isMobileView?'block':'none', marginLeft:'200px', zIndex:'3', position:'relative', cursor: "pointer"}}
+          onClick={() => toggleSidebar(false)}
+        />
       <div
         style={{
           display: "flex",
@@ -36,8 +65,8 @@ const Sidebar = () => {
           width: "208px",
           height: "47px",
           background: isDarkMode
-            ? "linear-gradient(0deg, #444444, #444444)" // Dark mode gradient
-            : "linear-gradient(0deg, #D7C7F4, #D7C7F4)", // Light mode gradient
+            ? "linear-gradient(0deg, #444444, #444444)" 
+            : "linear-gradient(0deg, #D7C7F4, #D7C7F4)",
           cursor: "pointer",
           padding: "10px",
         }}
@@ -64,7 +93,7 @@ const Sidebar = () => {
             justifyContent: "center",
             top: "42px",
             margin: "0",
-            color: isDarkMode ? "#FFFFFF" : "#000000", // Text color based on mode
+            color: isDarkMode ? "#FFFFFF" : "#000000", 
           }}
         >
           New Chat
@@ -74,13 +103,15 @@ const Sidebar = () => {
           alt="edit"
           style={{ width: "24px", height: "24px" }}
         />
+        
       </div>
+     
 
       <div
         style={{
           background: isDarkMode
-            ? "linear-gradient(0deg, #555555, #555555)" // Dark mode gradient
-            : "linear-gradient(0deg, #D7C7F4, #D7C7F4)", // Light mode gradient
+            ? "linear-gradient(0deg, #555555, #555555)" 
+            : "linear-gradient(0deg, #D7C7F4, #D7C7F4)", 
           borderRadius: "10px",
           height: "39px",
           width: "175.16px",
@@ -96,7 +127,7 @@ const Sidebar = () => {
         <p
           style={{
             fontSize: "16px",
-            color: isDarkMode ? "#FFFFFF" : "#414146", // Text color for button
+            color: isDarkMode ? "#FFFFFF" : "#414146", 
             fontFamily: "Ubuntu",
             fontWeight: "700",
             margin: "0",

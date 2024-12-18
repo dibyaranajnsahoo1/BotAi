@@ -115,9 +115,7 @@
 
 
 
-
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../Sidebar";
 import Navigation from "../Navigation";
 import { useSelector, useDispatch } from "react-redux";
@@ -135,16 +133,101 @@ const PastConversations = () => {
     dispatch(clearHistory());
   };
 
+
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    
+    useEffect(() => {
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+      
+  
+    }, []);
+  
+    const sidebarWidth = windowWidth <= 768 ? "0px" : "208px";
+  
+    const [isSidebarVisible, setSidebarVisible] = useState(false);
+  
+    const toggleSidebar = (visibility) => {
+      setSidebarVisible(visibility);
+    };
+  
+
+
+  const renderConversationHistory = () => {
+    return conversationHistory.length > 0 ? (
+      conversationHistory.map((savedConversation, index) => (
+        <div
+          key={index}
+          style={{
+            background: isDarkMode
+              ? "linear-gradient(90deg, #444 0%, #666 100%)"
+              : "linear-gradient(90deg, #BFACE2 0%, #D7C7F4 100%)",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            borderRadius: "10px",
+            padding: "15px",
+            marginBottom: "10px",
+          }}
+        >
+          {savedConversation.conversations.map((entry, entryIndex) => {
+            const feedback =
+              savedConversation.feedback &&
+              savedConversation.feedback[entry.timeStamp]
+                ? savedConversation.feedback[entry.timeStamp]
+                : "No feedback provided";
+            const rating =
+              savedConversation.ratings &&
+              savedConversation.ratings[entry.timeStamp]
+                ? `${savedConversation.ratings[entry.timeStamp]} stars`
+                : "No rating provided";
+                // console.log(savedConversation.feedback.entryIndex.feedback)
+                console.log(entryIndex)
+                // console.log( savedConversation.ratings[entry.timeStamp])
+                // console.log( savedConversation.ratings)
+                // console.log( entry.likeDislike)
+                // console.log( entryIndex)
+
+
+
+
+
+
+            return (
+              <ConversationHistoryMessageBox
+                key={entryIndex}
+                question={entry.question}
+                answer={entry.answer}
+                feedback={feedback}
+                rating={rating}
+              />
+            );
+          })}
+        </div>
+      ))
+    ) : (
+      <p
+        style={{
+          color: isDarkMode ? "#9CA3AF" : "#6B7280",
+          textAlign: "center",
+          marginTop: "1rem",
+        }}
+      >
+        No conversation history available.
+      </p>
+    );
+  };
+
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <div style={{ width: "208px" }}>
-        <Sidebar />
-      </div>
+     <div style={{ width: sidebarWidth }}>
+         <Sidebar  isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar}/>
+      </div> 
 
       <div
         style={{
           width: "0",
-          position: "relative",
+          // position: "relative",
           padding: "1rem",
           display: "flex",
           flexDirection: "column",
@@ -154,7 +237,7 @@ const PastConversations = () => {
             : "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
         }}
       >
-        <Navigation />
+        <Navigation toggleSidebar={() => toggleSidebar(true)}/>
 
         <div style={{ margin: "1.5rem auto" }}>
           <h1
@@ -197,50 +280,7 @@ const PastConversations = () => {
           <h2 style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
             Today's Chat
           </h2>
-          {conversationHistory.length > 0 ? (
-            conversationHistory.map((savedConversation, index) => (
-              <div
-                key={index}
-                style={{
-                  background: isDarkMode
-                    ? "linear-gradient(90deg, #444 0%, #666 100%)"
-                    : "linear-gradient(90deg, #BFACE2 0%, #D7C7F4 100%)",
-                  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                  borderRadius: "10px",
-                  padding: "15px",
-                  marginBottom: "10px",
-                }}
-              >
-                {savedConversation.conversations.map((entry, entryIndex) => (
-                  <ConversationHistoryMessageBox
-                    key={entryIndex}
-                    question={entry.question}
-                    answer={entry.answer}
-                    feedback={
-                      savedConversation.feedback[entry.timeStamp]
-                        ? savedConversation.feedback[entry.timeStamp]
-                        : "No feedback provided"
-                    }
-                    rating={
-                      savedConversation.ratings[entry.timeStamp]
-                        ? `${savedConversation.ratings[entry.timeStamp]} stars`
-                        : "No rating provided"
-                    }
-                  />
-                ))}
-              </div>
-            ))
-          ) : (
-            <p
-              style={{
-                color: isDarkMode ? "#9CA3AF" : "#6B7280",
-                textAlign: "center",
-                marginTop: "1rem",
-              }}
-            >
-              No conversation history available.
-            </p>
-          )}
+          {renderConversationHistory()}
         </div>
       </div>
     </div>

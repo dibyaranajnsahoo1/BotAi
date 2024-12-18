@@ -16,7 +16,7 @@ const Input = ({ question, setQuestion, onKeyDown }) => {
         onKeyDown={onKeyDown}
         style={{
           width: "100%",
-          height: "41px", 
+          height: "50px", 
           borderRadius: "0.375rem", 
           border:'1px solid black',
           color: isDarkMode ? "#FFFFFF" : "#000000",
@@ -24,6 +24,7 @@ const Input = ({ question, setQuestion, onKeyDown }) => {
           paddingLeft: "1rem",
         }}
         placeholder="Type your question here..."
+        required
       />
     </div>
   );

@@ -7,15 +7,15 @@ const Layout = () => {
     <div style={{ display: "flex", minHeight: "100vh" }}>
       <div
         style={{
-          width: "13rem", // Equivalent to w-52 (52 units in Tailwind)
-          display: "none", // Hidden by default
+          width: "13rem", 
+          display: "none", 
         }}
-        className="sm:block" // This still uses Tailwind to show on small screens or larger
+        className="sm:block" 
       >
         <Sidebar />
       </div>
       <div style={{ flexGrow: 1 }}>
-        <Outlet /> {/* This renders the nested routes */}
+        <Outlet /> 
       </div>
     </div>
   );

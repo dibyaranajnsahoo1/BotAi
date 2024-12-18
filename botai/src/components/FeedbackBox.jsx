@@ -19,8 +19,7 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
     >
       <div
         style={{
-          backgroundColor: isDarkMode ? "#333333" : "#FAF7FF", // Dark or light background
-          padding: "1rem",
+          backgroundColor: isDarkMode ? "#333333" : "#FAF7FF", 
           borderRadius: "0.375rem",
           // border:'1px solid red'
           width:'766px'
@@ -28,7 +27,7 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
       >
         <div
           style={{
-            backgroundColor: isDarkMode ? "#444444" : "#FAF7FF", // Dark or light purple background
+            backgroundColor: isDarkMode ? "#444444" : "#FAF7FF", 
            
             maxWidth: "766px",
             height: "max-content",
@@ -57,7 +56,7 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
               <p
                 style={{
                   fontSize: "22px",
-                  color: isDarkMode ? "#FFFFFF" : "#000000", // Dark or light text color
+                  color: isDarkMode ? "#FFFFFF" : "#000000", 
                 }}
               >
                 Provide Additional Feedback
@@ -94,9 +93,9 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
               style={{
                 resize: "none",
                 width: "91.67%", 
-                borderRadius: "0.625rem",
+                borderRadius: "10px",
                 padding: "1rem",
-                height: "170px",
+                height: "187px",
                 margin: "0.5rem auto",
                 border: isDarkMode
                   ? "1px solid #555555" 
@@ -112,6 +111,7 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
               display: "flex",
               justifyContent: "flex-end",
               marginRight: "1.75rem",
+               
             }}
           >
             <button
@@ -119,10 +119,13 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
                 width: "157px",
                 height: "50px",
                 textAlign: "center",
+                fontFamily:'Ubuntu',
+                fontWeight:'400',
                 backgroundColor: isDarkMode ? "#555555" : " #D7C7F4",
-                fontSize: "1.25rem",
-                borderRadius: "0.375rem",
-                color: "#FFFFFF",
+                fontSize: "20px",
+                borderRadius: "5px",
+                color: isDarkMode ? "#555555" : " black",
+                border:'none'
               }}
               onClick={() => onSubmit(feedback)}
             >

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import botAILogo from "../../assets/botAI_logo.png";
 import Navigation from "../Navigation";
 import Input from "../Input";
 import Button from "../Button";
 import SuggestionCards from "../SuggestionCards";
 import Sidebar from "../Sidebar";
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   setQuestion,
@@ -44,14 +45,58 @@ const HomePage = ({ data }) => {
     navigate("/chat");
   };
 
+
+
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+    
+
+  }, []);
+
+  const sidebarWidth = windowWidth <= 768 ? "0px" : "208px";
+
+  const [isSidebarVisible, setSidebarVisible] = useState(false);
+
+  const toggleSidebar = (visibility) => {
+    setSidebarVisible(visibility);
+  };
+
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const getGridTemplateColumns = () => {
+    if (windowWidth >= 1024) {
+      return "repeat(2, 1fr)"; 
+    } else if (windowWidth >= 768) {
+      return "repeat(2, 1fr)"; 
+    } else {
+      return "1fr"; 
+    }
+  };
+
+
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <div style={{ width: "208px" }}>
-        <Sidebar />
-      </div>
+      
+      
+      <div style={{ width: sidebarWidth }}>
+         <Sidebar  isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar}/>
+      </div> 
       <div
         style={{
-          position: "relative",
           padding: "1rem",
           display: "flex",
           flexDirection: "column",
@@ -60,7 +105,8 @@ const HomePage = ({ data }) => {
             "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
         }}
       >
-        <Navigation />
+       
+        <Navigation toggleSidebar={() => toggleSidebar(true)}/>
         <div
           style={{
             display: "flex",
@@ -96,18 +142,14 @@ const HomePage = ({ data }) => {
             />
           </div>
 
-          <div className="suggestion-cards-container"   style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "1rem",
-              marginTop: "auto",
-              width: "100%",
-              "@media (min-width: 768px)": {
-                gridTemplateColumns: "repeat(2, 1fr)",
-              },
-              "@media (min-width: 1024px)": {
-                gridTemplateColumns: "repeat(2, 1fr)",
-              },
+          <div 
+              style={{
+                display: "grid",
+                gridTemplateColumns: getGridTemplateColumns(), 
+                gap: "1rem",
+                marginTop: "auto",
+                width: "100%",
+            
             }}>
             {data.slice(0, 4).map((item, index) => (
               <div key={index}>
