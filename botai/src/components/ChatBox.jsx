@@ -205,7 +205,7 @@ import FeedbackBox from "./FeedbackBox";
 import { saveConversations, clearChat, addRating, addFeedback } from "../../src/features/chatSlice";
 import { useSelector } from "react-redux"; 
 
-const ChatBox = ({ text, type, index }) => {
+const ChatBox = ({ text, type, index,  }) => {
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
@@ -292,10 +292,10 @@ const ChatBox = ({ text, type, index }) => {
         style={{ width: "70px", height: "75px" }}
       />
       <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-        <p style={{ fontSize: "1rem", fontWeight: "bold" }}>
+        <p style={{ fontSize: "1rem", fontWeight: "bold" , color:isDarkMode?"white": "black"}}>
           {type === "question" ? "You" : "Bot AI"}
         </p>
-        <p style={{ marginBottom: "0.5rem" }}>{text}</p>
+        <p style={{ marginBottom: "0.5rem" , color:isDarkMode?"white": "black"}}>{text}</p>
         <p
           style={{
             fontWeight: "40px",

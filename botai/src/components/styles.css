@@ -15,9 +15,7 @@
 .suggestion-bg {
   background: white;
 }
-.chatcard-bg {
-  background: #d7c7f421;
-}
+
 /* styles.css */
 
 .transition-transform {
@@ -32,19 +30,6 @@
   background: white;
 }
 
-
-
-
-
-body.light-mode {
-  background-color: var(--background-light);
-  color: var(--text-light);
-}
-
-body.dark-mode {
-  background-color: var(--background-dark);
-  color: var(--text-dark);
-}
 
 @media (min-width: 768px) {
   .suggestion-cards-container {
@@ -63,7 +48,7 @@ body.dark-mode {
 }
 
 
-/* Smartphones (portrait and landscape) ----------- */
+
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {

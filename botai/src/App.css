@@ -34,7 +34,3 @@ button {
 .chat-bubble .chat-text.user {
   background-color: #e1bee7;
 }
-
-button:hover {
-  background-color: #f2f2f2;
-}

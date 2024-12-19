@@ -8,19 +8,19 @@ import Menu from '../assets/burger-bar.png'
 const Navigation = ({toggleSidebar }) => {
   const dispatch = useDispatch();
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
+  
 
   const handleThemeToggle = () => {
     dispatch(toggleTheme());
     const theme = isDarkMode ? "light-mode" : "dark-mode";
     document.body.className = theme; 
+
   };
 
 
   React.useEffect(() => {
     document.body.className = isDarkMode ? "dark-mode" : "light-mode";
   }, [isDarkMode]);
-
-
 
 
  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);

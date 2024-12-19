@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import idea from '../../src/assets/image 34.png' 
 const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
   const [feedback, setFeedback] = useState("");
-  const isDarkMode = useSelector((state) => state.theme.isDarkMode); // Get dark mode state
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode); 
   if (!isOpen) return null;
 
   return (
@@ -19,15 +19,15 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
     >
       <div
         style={{
-          backgroundColor: isDarkMode ? "#333333" : "#FAF7FF", 
+          backgroundColor: isDarkMode ? "rgba(70, 46, 118, 0.52) " : "#FAF7FF", 
           borderRadius: "0.375rem",
-          // border:'1px solid red'
+         
           width:'766px'
         }}
       >
         <div
           style={{
-            backgroundColor: isDarkMode ? "#444444" : "#FAF7FF", 
+            backgroundColor: isDarkMode ? " rgb(57, 39, 97) " : "#FAF7FF", 
            
             maxWidth: "766px",
             height: "max-content",
@@ -121,10 +121,10 @@ const FeedbackBox = ({ isOpen, onClose, onSubmit }) => {
                 textAlign: "center",
                 fontFamily:'Ubuntu',
                 fontWeight:'400',
-                backgroundColor: isDarkMode ? "#555555" : " #D7C7F4",
+                backgroundColor: isDarkMode ? "rgb(13, 4, 31)" : " #D7C7F4",
                 fontSize: "20px",
                 borderRadius: "5px",
-                color: isDarkMode ? "#555555" : " black",
+                color: isDarkMode ? "white" : " black",
                 border:'none'
               }}
               onClick={() => onSubmit(feedback)}

@@ -22,6 +22,7 @@ const HomePage = ({ data }) => {
   const answer = useSelector((state) => state.chat.currentAnswer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
 
   const findAnswer = (text) => {
     const normalizedText = text.trim().toLowerCase();
@@ -59,6 +60,7 @@ const HomePage = ({ data }) => {
   }, []);
 
   const sidebarWidth = windowWidth <= 768 ? "0px" : "208px";
+  const isphoneView = windowWidth <= 768;
 
   const [isSidebarVisible, setSidebarVisible] = useState(false);
 
@@ -91,6 +93,8 @@ const HomePage = ({ data }) => {
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
       
+
+
       
       <div style={{ width: sidebarWidth }}>
          <Sidebar  isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar}/>
@@ -101,8 +105,9 @@ const HomePage = ({ data }) => {
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
-          background:
-            "linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)",
+          width:"0",
+          background: isDarkMode?"linear-gradient(180deg, rgb(43, 37, 56) 0%, rgb(32, 19, 59) 100%)":(isphoneView ? 'linear-gradient(180deg, #F9FAFA 59%, #EDE4FF 100%)':"linear-gradient(180deg, rgba(215, 199, 244, 0.2) 0%, rgba(151, 133, 186, 0.2) 100%)"),
+         
         }}
       >
        
@@ -125,9 +130,10 @@ const HomePage = ({ data }) => {
               justifyContent: "center",
               flexGrow: 1,
               gap: "5px",
+              marginTop:isphoneView?"20%":"0",
             }}
           >
-            <p style={{ fontSize: "28px", fontWeight: "500", fontFamily: "Ubuntu" }}>
+            <p style={{ fontSize: "28px", fontWeight: "500", fontFamily: "Ubuntu",  color:  isDarkMode?"white":"black" }}>
               How Can I Help You Today?
             </p>
             <img
@@ -147,7 +153,7 @@ const HomePage = ({ data }) => {
                 display: "grid",
                 gridTemplateColumns: getGridTemplateColumns(), 
                 gap: "1rem",
-                marginTop: "auto",
+                // marginTop:isphoneView? "40%":"auto",
                 width: "100%",
             
             }}>
@@ -171,18 +177,21 @@ const HomePage = ({ data }) => {
               display: "flex",
               gap: "0.75rem",
               alignItems: "center",
+              
             }}
           >
             <Input
               question={question}
               setQuestion={(q) => dispatch(setQuestion(q))}
               onKeyDown={(e) => e.key === "Enter" && handleAsk()}
+              isphoneView={isphoneView}
             />
-            <Button text={"Ask"} handleClick={handleAsk} />
-            <Button text={"Save"} handleClick={() => dispatch(saveConversations())} />
+            <Button text={"Ask"} handleClick={handleAsk} isphoneView={isphoneView} />
+            <Button text={"Save"} handleClick={() => dispatch(saveConversations())} isphoneView={isphoneView}/>
           </div>
         </div>
       </div>
+      <p style={{display:'none'}}>Dibya ranjan sahoo </p>
     </div>
   );
 };
