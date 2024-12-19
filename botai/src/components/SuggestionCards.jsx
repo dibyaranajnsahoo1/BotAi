@@ -8,7 +8,7 @@ const SuggestionCards = ({ text, data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const isDarkMode = useSelector((state) => state.theme.isDarkMode); // Get dark mode state
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode); 
 
   const findAnswer = (text) => {
     const normalizedText = text.trim().toLowerCase();
@@ -77,3 +77,5 @@ const SuggestionCards = ({ text, data }) => {
 };
 
 export default SuggestionCards;
+
+
