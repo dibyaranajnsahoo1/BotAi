@@ -36,9 +36,4 @@ This ReactJS application allows users to interact with an AI model, providing fe
 Install dependencies:
 
 
-In this file:
 
-1. **Image Links**: I've placed placeholders for images (e.g., `https://example.com/chat-mockup.jpg`). Replace them with actual URLs for your project images.
-2. **Project Details**: All the necessary details about the setup, usage, features, and design choices are included in the README.
-
-Let me know if you'd like to add or modify anything!
