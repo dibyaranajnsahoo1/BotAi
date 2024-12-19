@@ -40,40 +40,6 @@ Make sure you have the following installed:
    cd BotAi
 Install dependencies:
 
-bash
-Copy code
-npm install
-Run the development server:
-
-bash
-Copy code
-npm start
-This will start the application at http://localhost:3000.
-
-Usage
-Chat with AI: Type your question in the input field and press "Ask".
-Feedback:
-You can rate the AI's answers by clicking the thumbs up/thumbs down buttons.
-At the end of the conversation, a 5-star rating and a feedback box will appear. You can provide a rating and subjective feedback.
-View Past Conversations: Access your saved chats from the sidebar and see the feedback provided.
-Filter Feedback: Filter conversations by rating using the feedback panel.
-Design Choices
-UI/UX: I used Material-UI components for quick and consistent UI design. The goal was to create a simple, intuitive, and user-friendly experience.
-Dark Mode: I implemented a dark mode toggle using React state and CSS to provide a better user experience for different lighting conditions.
-State Management: Redux was used to manage the state of chat conversations and feedback. This makes it easy to save, retrieve, and update the data across different components.
-Trade-offs
-Due to time constraints, I didn't implement complex AI interaction; the responses are mocked in a JSON file. If I had more time, I would have integrated a real AI service.
-I kept the design simple with minimal animations. A more polished design could include transitions and more advanced UI elements.
-Future Improvements
-Integrate a real AI service to generate dynamic responses.
-Add user authentication for saving individual chat histories.
-Improve the feedback filtering interface for a more detailed analysis of conversations.
-Implement unit and integration tests for better code reliability.
-Images
-
-
-vbnet
-Copy code
 
 In this file:
 
