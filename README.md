@@ -27,11 +27,6 @@ This ReactJS application allows users to interact with an AI model, providing fe
 
 ### Prerequisites
 
-Make sure you have the following installed:
-
-- Node.js (v16.x or higher)
-- npm or yarn
-
 ### Installation
 
 1. Clone the repository:
