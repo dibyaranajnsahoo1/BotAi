@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# **BOTAI Application**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **Overview**
+BOTAI is a ReactJS-based application that allows users to interact with an AI model, provide feedback on AI responses, and revisit past conversations. The application includes various feedback mechanisms, ensuring a user-friendly and engaging experience.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Features**
 
-### `npm start`
+1. **AI Chat Interaction**  
+   - Users can chat with an AI model that provides mock responses.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Feedback Mechanisms**  
+   - **Thumbs Up/Thumbs Down**: Users can like or dislike individual AI responses.  
+   - **5-Star Rating**: Users can rate the overall conversation experience (1 to 5 stars).  
+   - **Subjective Feedback**: Users can leave detailed textual feedback on their experience.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **View Past Conversations**  
+   - Users can revisit saved conversations along with their respective feedback.
 
-### `npm test`
+4. **Dark Mode**  
+   - Seamless toggle between **Light** and **Dark** themes for an optimal viewing experience.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## **Technologies Used**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **ReactJS**: Frontend framework for building a dynamic user interface.  
+- **Material-UI**: Provides modern and pre-built UI components.  
+- **Redux**: State management for chat conversations and feedback.  
+- **CSS**: Custom styling with dark and light mode support.  
+ 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **Screenshots**
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Chat Interface **Light Mode**| Chat Interface **Dark Mode**|
+| -------------- | --------------- |
+| ![Light Mode Chat](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153415.png) | ![Light Mode Feedback](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153421.png) |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Conversation History **Light Mode**| Conversation History **Dark Mode**|
+| -------------- | --------------- |
+| ![Dark Mode Chat](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153500.png) | ![Dark Mode Feedback](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153506.png) |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### **Additional Screens**
+| Chat Interface | Mobail view | Mobail view |
+| --------------------- | ------- | ----------- |
+| ![History](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153439.png) | ![Ratings](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153531.png) | ![Theme](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153539.png) |
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## **Getting Started**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/dibyaranajnsahoo1/BotAi.git
+cd BotAi
