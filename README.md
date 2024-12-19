@@ -1,4 +1,4 @@
-# AI Chat Feedback Application
+# BOTAI Application
 
 ## Overview
 
@@ -12,7 +12,6 @@ This ReactJS application allows users to interact with an AI model, providing fe
   - **Rating**: At the end of the conversation, users can rate the interaction on a scale of 1 to 5.
   - **Subjective Feedback**: Users can provide textual feedback.
 - **View Past Conversations**: Conversations and their respective feedback can be saved and revisited.
-- **View and Filter Feedback**: Users can view and filter feedback based on ratings across all conversations.
 - **Dark Mode**: Users can toggle between light and dark modes.
 
 ## Technologies Used
@@ -23,9 +22,6 @@ This ReactJS application allows users to interact with an AI model, providing fe
 - **CSS**: For custom styling, including support for dark and light modes.
 - **JSON**: Mock data for AI responses.
 
-## Getting Started
-
-### Prerequisites
 
 ### Installation
 
@@ -33,7 +29,24 @@ This ReactJS application allows users to interact with an AI model, providing fe
    ```bash
    https://github.com/dibyaranajnsahoo1/BotAi.git
    cd BotAi
-Install dependencies:
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153415.png)
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153421.png)
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153432.png)
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153439.png)
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153500.png)
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153506.png)
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153531.png)
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153522.png)
+![MyBookings ](https://github.com/dibyaranajnsahoo1/BotAi/blob/main/Screenshot%202024-12-19%20153539.png)
+
+
+
+
+
+
+
+
+
 
 
 
